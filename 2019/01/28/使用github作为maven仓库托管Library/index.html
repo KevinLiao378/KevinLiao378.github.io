@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="maven,gradle,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="KevinLiao的小抄本">
-<meta property="og:url" content="http://KevinLiao378.github.io/index.html">
+<meta name="description" content="配置打包脚本配置脚本在Library Module下build.gradle最后添加如下脚本： 1234567891011121314151617181920apply plugin: &apos;maven&apos;ext &amp;#123;    // Library本地maven仓库地址    GITHUB_REPO_PATH = &quot;D:\\develop\\AndroidProjects\\demoLibrary">
+<meta name="keywords" content="maven,gradle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用github作为maven仓库托管Library">
+<meta property="og:url" content="http://KevinLiao378.github.io/2019/01/28/使用github作为maven仓库托管Library/index.html">
 <meta property="og:site_name" content="KevinLiao的小抄本">
+<meta property="og:description" content="配置打包脚本配置脚本在Library Module下build.gradle最后添加如下脚本： 1234567891011121314151617181920apply plugin: &apos;maven&apos;ext &amp;#123;    // Library本地maven仓库地址    GITHUB_REPO_PATH = &quot;D:\\develop\\AndroidProjects\\demoLibrary">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-29T08:26:00.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KevinLiao的小抄本">
+<meta name="twitter:title" content="使用github作为maven仓库托管Library">
+<meta name="twitter:description" content="配置打包脚本配置脚本在Library Module下build.gradle最后添加如下脚本： 1234567891011121314151617181920apply plugin: &apos;maven&apos;ext &amp;#123;    // Library本地maven仓库地址    GITHUB_REPO_PATH = &quot;D:\\develop\\AndroidProjects\\demoLibrary">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://KevinLiao378.github.io/">
+  <link rel="canonical" href="http://KevinLiao378.github.io/2019/01/28/使用github作为maven仓库托管Library/">
 
 
 
 
 
-  <title>KevinLiao的小抄本</title>
+  <title>使用github作为maven仓库托管Library | KevinLiao的小抄本</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -234,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/28/使用github作为maven仓库托管Library/" itemprop="url">使用github作为maven仓库托管Library</a></h1>
+          <h1 class="post-title" itemprop="name headline">使用github作为maven仓库托管Library</h1>
         
 
         <div class="post-meta">
@@ -340,17 +342,23 @@
       
 
       
-        
-          <h2 id="配置打包脚本"><a href="#配置打包脚本" class="headerlink" title="配置打包脚本"></a>配置打包脚本</h2><h3 id="配置脚本"><a href="#配置脚本" class="headerlink" title="配置脚本"></a>配置脚本</h3><p>在Library Module下<code>build.gradle</code>最后添加如下脚本：</p>
+        <h2 id="配置打包脚本"><a href="#配置打包脚本" class="headerlink" title="配置打包脚本"></a>配置打包脚本</h2><h3 id="配置脚本"><a href="#配置脚本" class="headerlink" title="配置脚本"></a>配置脚本</h3><p>在Library Module下<code>build.gradle</code>最后添加如下脚本：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apply <span class="string">plugin:</span> <span class="string">'maven'</span></span><br><span class="line">ext &#123;</span><br><span class="line">    <span class="comment">// Library本地maven仓库地址</span></span><br><span class="line">    GITHUB_REPO_PATH = <span class="string">"D:\\develop\\AndroidProjects\\demoLibrary"</span></span><br><span class="line">    PUBLISH_GROUP_ID = <span class="string">'com.example'</span></span><br><span class="line">    PUBLISH_ARTIFACT_ID = <span class="string">'demoLibrary'</span></span><br><span class="line">    PUBLISH_VERSION = <span class="string">'1.0.0'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories.mavenDeployer &#123;</span><br><span class="line">        <span class="keyword">def</span> deployPath = file(project.GITHUB_REPO_PATH)</span><br><span class="line">        repository(<span class="string">url:</span> <span class="string">"file://$&#123;deployPath.absolutePath&#125;"</span>)</span><br><span class="line">        pom.project &#123;</span><br><span class="line">            groupId project.PUBLISH_GROUP_ID</span><br><span class="line">            artifactId project.PUBLISH_ARTIFACT_ID</span><br><span class="line">            version project.PUBLISH_VERSION</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/28/使用github作为maven仓库托管Library/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<p>其中<code>GITHUB_REPO_PATH</code>为本地maven仓库地址，<code>PUBLISH_GROUP_ID</code>、<code>PUBLISH_ARTIFACT_ID</code>和<code>PUBLISH_VERSION</code>分别对应了maven仓库pom文件的<code>groupId</code>、<code>artifactId</code>和<code>version</code>，其最终效果为：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'com.example:demoLibrary:1.0.0'</span></span><br></pre></td></tr></table></figure>
+<h3 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h3><p>在Android Studio右侧<code>gradle</code>找到<code>:soundlinksSDK &gt; Tasks &gt; upload &gt; uploadArchives</code>，双击执行后，将会在此前设置的<code>GITHUB_REPO_PATH</code>目录生成<code>aar</code>及maven配置文件。</p>
+<h2 id="上传本地maven仓库到github"><a href="#上传本地maven仓库到github" class="headerlink" title="上传本地maven仓库到github"></a>上传本地maven仓库到github</h2><h3 id="创建github仓库，得到仓库地址"><a href="#创建github仓库，得到仓库地址" class="headerlink" title="创建github仓库，得到仓库地址"></a>创建github仓库，得到仓库地址</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/KevinLiao378/ParamitaApp.git</span><br></pre></td></tr></table></figure>
+<h3 id="上传本地maven仓库到github-1"><a href="#上传本地maven仓库到github-1" class="headerlink" title="上传本地maven仓库到github"></a>上传本地maven仓库到github</h3><p>在<code>GITHUB_REPO_PATH</code>目录执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 初始化git</span><br><span class="line">git init</span><br><span class="line">// 添加文件</span><br><span class="line">git add .</span><br><span class="line">git commit -m 'initial commit'</span><br><span class="line">// 添加github关联</span><br><span class="line">git remote add origin https://github.com/KevinLiao378/demoLibrary.git</span><br><span class="line">// 提交</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>使用github的raw服务作为下载服务，仓库对应的地址为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/KevinLiao378/demoLibrary/master</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>在项目下的<code>builde.gradle</code>添加上一步得到的仓库地址：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    google()</span><br><span class="line">    jcenter()</span><br><span class="line">    maven &#123;</span><br><span class="line">        url <span class="string">'https://raw.githubusercontent.com/KevinLiao378/demoLibrary/master'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在app下的<code>build.gradle</code>添加依赖：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'com.example:demoLibrary:1.0.0'</span></span><br></pre></td></tr></table></figure>
+<p>至此，同步后即可在代码中使用了。</p>
+
       
     </div>
     
@@ -365,142 +373,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://KevinLiao378.github.io/2019/01/17/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="KevinLiao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KevinLiao的小抄本">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/17/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T15:55:46+08:00">
-                2019-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/maven/" rel="tag"># maven</a>
           
-            
+            <a href="/tags/gradle/" rel="tag"># gradle</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -510,10 +414,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -521,6 +426,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -541,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -602,6 +520,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置打包脚本"><span class="nav-number">1.</span> <span class="nav-text">配置打包脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置脚本"><span class="nav-number">1.1.</span> <span class="nav-text">配置脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行脚本"><span class="nav-number">1.2.</span> <span class="nav-text">执行脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传本地maven仓库到github"><span class="nav-number">2.</span> <span class="nav-text">上传本地maven仓库到github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建github仓库，得到仓库地址"><span class="nav-number">2.1.</span> <span class="nav-text">创建github仓库，得到仓库地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传本地maven仓库到github-1"><span class="nav-number">2.2.</span> <span class="nav-text">上传本地maven仓库到github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -735,6 +669,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
